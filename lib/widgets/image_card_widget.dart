@@ -19,6 +19,7 @@ class ImageCardWidget extends StatelessWidget {
       child: Stack(
         children: [
           Container(
+            margin: const EdgeInsets.all(5),
             height: double.infinity,
             width: double.infinity,
             decoration: BoxDecoration(

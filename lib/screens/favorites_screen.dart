@@ -23,8 +23,7 @@ class FavoritesScreen extends StatelessWidget {
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               childAspectRatio: 1/1.2,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10
+
             ),
             itemBuilder: (context, index) {
               return ImageCardWidget(
@@ -39,27 +38,13 @@ class FavoritesScreen extends StatelessWidget {
               );
             },
       );
-      
-      
-      // ListView.builder(
-      //   itemCount: sorted.length,
-      //   itemBuilder: (context, index) {
-      //     final favorite = sorted[index];
-      //     return ListTile(
-      //       title: Text(favorite.key),
-      //       trailing: Text(favorite.value.toString()),
-      //     );
-      //   },
-      // );
+
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Favorites'),
+        title: const Text('Favorites Images'),
       ),
-      body: Container(
-        padding: const EdgeInsets.all(10),
-        child: fovoritesGrid
-      )
+      body: fovoritesGrid
     
     );
   }

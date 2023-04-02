@@ -16,44 +16,38 @@ class RecetScreen extends StatelessWidget {
     // );
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Recent'),
+        title: const Text('Recent Images'),
       ),
-      body: Container(
-        padding: const EdgeInsets.all(10),
-        child: FutureBuilder(
-        future: MidJourneyApi().fetchRecent(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            final images = snapshot.data as List<String>;
-            return GridView.builder(
-              
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 1/1.2,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10
-              ),
-              itemCount: images.length,
-              itemBuilder: (context, index) {
-                return ImageCardWidget(
-                  onPressed: (){
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => ImageScreen(imgUrl: images[index])
-                      )
-                    );
-                  }, 
-                  imgUrl: images[index]
-                );
-              },
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
-        ),
+      body: FutureBuilder(
+      future: MidJourneyApi().fetchRecent(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          final images = snapshot.data as List<String>;
+          return GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 1/1.2,
+            ),
+            itemCount: images.length,
+            itemBuilder: (context, index) {
+              return ImageCardWidget(
+                onPressed: (){
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ImageScreen(imgUrl: images[index])
+                    )
+                  );
+                }, 
+                imgUrl: images[index]
+              );
+            },
+          );
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
       )
     );
   }

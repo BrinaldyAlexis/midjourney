@@ -34,15 +34,15 @@ class HomeScreen extends StatelessWidget {
             },
             items: const [
               BottomNavigationBarItem(
-                icon: Icon(Icons.apps),
+                icon: Icon(Icons.grid_view_outlined),
                 label: 'Recent',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.star_purple500_outlined),
+                icon: Icon(Icons.star_border_outlined),
                 label: 'Top',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.favorite),
+                icon: Icon(Icons.favorite_outline_outlined),
                 label: 'Favorite',
               ),
             ],
