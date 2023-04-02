@@ -27,16 +27,20 @@ class WallapeprCardWidget extends StatelessWidget {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: CachedNetworkImage(
-                imageUrl: imgUrl,
-                fit: BoxFit.fill,
-                placeholder: (context, url) => const Center(child: SizedBox(height: 15, width: 15, child: CircularProgressIndicator())),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
+              child: Hero(
+                tag: imgUrl,
+                child: CachedNetworkImage(
+                  imageUrl: imgUrl,
+                  fit: BoxFit.fill,
+                  placeholder: (context, url) => const Center(child: SizedBox(height: 15, width: 15, child: CircularProgressIndicator())),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                ),
               ),
             ),
           ),
           Positioned(
             bottom: 0,
+            right: 0,
             child: IconButton(
               icon: Icon(
                 isFavorite ? Icons.favorite : Icons.favorite_border,

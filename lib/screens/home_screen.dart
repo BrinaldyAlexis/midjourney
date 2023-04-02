@@ -43,7 +43,7 @@ class HomeScreen extends StatelessWidget {
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.favorite_outline_outlined),
-                label: 'Favorite',
+                label: 'Favorites',
               ),
             ],
           );

@@ -19,11 +19,15 @@ class WallPapeScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          CachedNetworkImage(
-            imageUrl: imgUrl,
-            height: double.infinity,
-            width: double.infinity,
-            fit: BoxFit.cover,
+          Hero(
+            tag: imgUrl,
+            child: CachedNetworkImage(
+              imageUrl: imgUrl,
+              height: double.infinity,
+              width: double.infinity,
+              fit: BoxFit.cover,
+              
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
