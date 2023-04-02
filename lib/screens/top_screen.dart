@@ -24,8 +24,8 @@ class TopScreen extends StatelessWidget {
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   childAspectRatio: 1/1.2,
-                  crossAxisSpacing: 5,
-                  mainAxisSpacing: 5
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10
                 ),
                 itemCount: images.length,
                 itemBuilder: (context, index) {
