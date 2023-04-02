@@ -43,6 +43,8 @@ dependencies:
   hydrated_bloc: ^9.1.0
   path_provider: ^2.0.14
   share_plus: ^6.3.1
+  flutter_wallpaper_manager: ^0.0.3
+  flutter_cache_manager: ^3.3.0
 
 dev_dependencies:
   flutter_test:

@@ -3,9 +3,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_wallpaper_manager/flutter_wallpaper_manager.dart';
 import 'package:midjourney/bloc/callery/gallery_cubit.dart';
 import 'package:midjourney/widgets/image_option_widget.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 
 class ImageScreen extends StatelessWidget {
@@ -44,7 +46,28 @@ class ImageScreen extends StatelessWidget {
                 ImageOptionWidget(
                   text: 'Set as wallpaper',
                   icon: const Icon(Icons.imagesearch_roller),
-                  onPressed: (){},
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: const Text('Set as wallpaper'),
+                        content: const Text('Do you want to set this image as wallpaper?'),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context), 
+                            child: const Text('Cancel')
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                              setWallpaper();
+                            }, 
+                            child: const Text('Set')
+                          )
+                        ],
+                      )
+                    );
+                  }
                 ),
                 ImageOptionWidget(
                   text: 'Share',
@@ -57,6 +80,8 @@ class ImageScreen extends StatelessWidget {
         ],
       ),
     );
+
+    
   }
 
   shareImg(BuildContext context) async{
@@ -75,4 +100,13 @@ class ImageScreen extends StatelessWidget {
 
 
   }
+
+  Future<void> setWallpaper() async {
+     int location = WallpaperManager.BOTH_SCREEN; // or location = WallpaperManager.LOCK_SCREEN;
+      final file = await DefaultCacheManager().getSingleFile(imgUrl);
+      await WallpaperManager.setWallpaperFromFile(file.path, location);
+  }
+
+  
+  
 }
