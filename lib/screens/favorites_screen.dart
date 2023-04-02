@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:midjourney/bloc/callery/gallery_cubit.dart';
-import 'package:midjourney/screens/image_screen.dart';
-import 'package:midjourney/widgets/image_card_widget.dart';
+import 'package:midjourney/screens/wallpaper_screen.dart';
+import 'package:midjourney/widgets/wallpaper_card_widget.dart';
 
 
 class FavoritesScreen extends StatelessWidget {
@@ -26,11 +26,11 @@ class FavoritesScreen extends StatelessWidget {
 
             ),
             itemBuilder: (context, index) {
-              return ImageCardWidget(
+              return WallapeprCardWidget(
                 onPressed: (){
                    Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => ImageScreen(imgUrl: sorted[index].key)
+                        builder: (context) => WallPapeScreen(imgUrl: sorted[index].key)
                       )
                     );
                 }, 

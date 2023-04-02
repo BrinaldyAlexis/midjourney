@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:midjourney/screens/image_screen.dart';
-import 'package:midjourney/widgets/image_card_widget.dart';
+import 'package:midjourney/screens/wallpaper_screen.dart';
+import 'package:midjourney/widgets/wallpaper_card_widget.dart';
 import 'package:midjourney_api/midjourney_api.dart';
 
 
@@ -26,11 +26,11 @@ class TopScreen extends StatelessWidget {
               ),
               itemCount: images.length,
               itemBuilder: (context, index) {
-                return ImageCardWidget(
+                return WallapeprCardWidget(
                   onPressed: (){
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => ImageScreen(imgUrl: images[index])
+                        builder: (context) => WallPapeScreen(imgUrl: images[index])
                       )
                     );
                   }, 
