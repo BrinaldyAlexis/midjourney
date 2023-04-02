@@ -1,74 +1,78 @@
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:midjourney/bloc/callery/gallery_cubit.dart';
+import 'package:midjourney/widgets/image_option_widget.dart';
+import 'package:share_plus/share_plus.dart';
 
 
 class ImageScreen extends StatelessWidget {
   const ImageScreen({super.key, required this.imgUrl});
   final String imgUrl;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Image'),
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            margin: const EdgeInsets.all(20),
-            height: 500,
-            width: 500,
-            child: CachedNetworkImage(
-              imageUrl: imgUrl,
-              fit: BoxFit.cover,
-              placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
-            )
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              GestureDetector(
-                child: Container(
-                  height: 50,
-                  width: 50,
-                  
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Icon(Icons.share),
-                  ),
-              ),
-              GestureDetector(
-                child: Container(
-                  height: 50,
-                  width: 50,
-                  
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Icon(Icons.format_paint),
-                ),
-              ),
-              GestureDetector(
-                child: Container(
-                  height: 50,
-                  width: 50,
-                  
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Icon(Icons.favorite),
-                ),
-              ),
-              
-            ],
-          ), 
-        ],
-      )
+    final isFavorite = context.select(
+      (GalleryCubit cubit) => cubit.isFavorite(imgUrl)
     );
+    final size = MediaQuery.of(context).size;
+    return Scaffold(
+      body: Column(
+        children: [
+          CachedNetworkImage(
+            imageUrl: imgUrl,
+            height: size.height * 0.85,
+            width: double.infinity,
+            fit: BoxFit.cover,
+          ),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ImageOptionWidget(
+                  text: 'Favorite',
+                  icon: Icon(
+                    isFavorite ? Icons.favorite : Icons.favorite_border,
+                    color: isFavorite ? Colors.red : Colors.white,
+                  ),
+                  onPressed: (){
+                    context.read<GalleryCubit>().toggleFavorite(imgUrl);
+                  },
+                ),
+                ImageOptionWidget(
+                  text: 'Set as wallpaper',
+                  icon: const Icon(Icons.imagesearch_roller),
+                  onPressed: (){},
+                ),
+                ImageOptionWidget(
+                  text: 'Share',
+                  icon: const Icon(Icons.share),
+                  onPressed: () => shareImg(context)
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  shareImg(BuildContext context) async{
+    // await Share.share(imgUrl);
+    //share img
+    final byteData = await NetworkAssetBundle(Uri.parse(imgUrl)).load(imgUrl);
+    final bytes = byteData.buffer.asUint8List();
+    final name = imgUrl.split('/').last;
+    // ignore: use_build_context_synchronously
+    final box = context.findRenderObject() as RenderBox;
+    final file = XFile.fromData(bytes, name: name, mimeType: 'image/png');
+    await Share.shareXFiles(
+      [file],
+      sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,
+    );
+
+
   }
 }

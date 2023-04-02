@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:flutter/material.dart';
 import 'package:midjourney/bloc/menu/menu_cubit.dart';
 import 'package:midjourney/screens/favorites_screen.dart';
@@ -29,7 +31,6 @@ class HomeScreen extends StatelessWidget {
                 menuCubit.currentScreen, // Accede a la propiedad currentScreen
             onTap: (int index) {
               menuCubit.changeScreen(index);
-              print('Dame El index: $index');
             },
             items: const [
               BottomNavigationBarItem(

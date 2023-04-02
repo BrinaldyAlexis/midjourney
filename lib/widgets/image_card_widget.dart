@@ -6,7 +6,7 @@ import 'package:midjourney/bloc/callery/gallery_cubit.dart';
 class ImageCardWidget extends StatelessWidget {
   const ImageCardWidget({super.key, required this.onPressed, required this.imgUrl});
 
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final String imgUrl;
 
   @override

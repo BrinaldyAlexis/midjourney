@@ -1,8 +1,5 @@
-import 'package:bloc/bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:midjourney/bloc/callery/gallery_state.dart';
-
-
 
 class GalleryCubit extends HydratedCubit<GalleryState> {
   GalleryCubit() : super(const GalleryState());

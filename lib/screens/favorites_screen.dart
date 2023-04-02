@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:midjourney/bloc/callery/gallery_cubit.dart';
+import 'package:midjourney/screens/image_screen.dart';
 import 'package:midjourney/widgets/image_card_widget.dart';
 
 
@@ -27,7 +28,13 @@ class FavoritesScreen extends StatelessWidget {
             ),
             itemBuilder: (context, index) {
               return ImageCardWidget(
-                onPressed: (){}, 
+                onPressed: (){
+                   Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => ImageScreen(imgUrl: sorted[index].key)
+                      )
+                    );
+                }, 
                 imgUrl: sorted[index].key
               );
             },
