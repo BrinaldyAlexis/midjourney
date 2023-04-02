@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:midjourney/bloc/callery/gallery_cubit.dart';
 
-class ImageCardWidget extends StatelessWidget {
-  const ImageCardWidget({super.key, required this.onPressed, required this.imgUrl});
+class WallapeprCardWidget extends StatelessWidget {
+  const WallapeprCardWidget({super.key, required this.onPressed, required this.imgUrl});
 
   final VoidCallback? onPressed;
   final String imgUrl;
@@ -36,7 +36,6 @@ class ImageCardWidget extends StatelessWidget {
             ),
           ),
           Positioned(
-            right: 0,
             bottom: 0,
             child: IconButton(
               icon: Icon(
